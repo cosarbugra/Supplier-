@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Supplier Management</title>
+</head>
+<body>
+  <h1>Supplier Management</h1>
+  <ul id="supplier-list"></ul>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    axios.get('https://northwind.vercel.app/api/suppliers')
+      .then(response => {
+        const suppliers = response.data;
+        const list = document.getElementById('supplier-list');
+        suppliers.forEach(supplier => {
+          const li = document.createElement('li');
+          li.textContent = supplier.companyName;
+          list.appendChild(li);
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  </script>
+</body>
+</html>

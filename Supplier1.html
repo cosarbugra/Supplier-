@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Supplier Management</title>
+</head>
+<body>
+  <h1>Supplier Management</h1>
+  <form id="add-supplier-form">
+    <label for="companyName">Company Name:</label>
+    <input type="text" id="companyName" name="companyName" required><br><br>
+    <label for="contactName">Contact Name:</label>
+    <input type="text" id="contactName" name="contactName" required><br><br>
+    <label for="contactTitle">Contact Title:</label>
+    <input type="text" id="contactTitle" name="contactTitle" required><br><br>
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" required><br><br>
+    <button type="submit">Add Supplier</button>
+  </form>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const form = document.getElementById('add-supplier-form');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = {
+        companyName: form.elements['companyName'].value,
+        contactName: form.elements['contactName'].value,
+        contactTitle: form.elements['contactTitle'].value,
+        address: form.elements['address'].value
+      };
+      axios.post('https://northwind.vercel.app/api/suppliers', data)
+        .then(response => {
+          console.log(response.data);
+          form.reset();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    });
+  </script>
+</body>
+</html>

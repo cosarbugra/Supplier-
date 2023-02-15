@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div>
+      <h2>Delete Supplier</h2>
+    </div>
+
+    <div>
+        <label for="supplierId">Supplier ID:</label>
+      <input type="text" id="supplierId" /><br />
+      <button onclick="deleteSupplier()">Delete Supplier</button>
+    </div>
+</body>
+
+<script>
+function deleteSupplier() {
+        const supplierId = document.getElementById("supplierId").value;
+        axios.delete(`https://northwind.vercel.app/api/suppliers/${supplierId}`)
+          .then(response => {
+            console.log(response.data);
+            alert("Supplier deleted successfully!");
+          })
+          .catch(error => {
+            console.error(error);
+            alert("An error occurred while deleting the supplier.");
+          });
+      }
+</script>
+</html>
